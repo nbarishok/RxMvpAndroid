@@ -1,5 +1,9 @@
 package com.onemanparty.rxmvpandroid.weather.presenter;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
+
 import com.onemanparty.rxmvpandroid.core.utils.RxTransformers;
 import com.onemanparty.rxmvpandroid.core.view.PerFragment;
 import com.onemanparty.rxmvpandroid.weather.model.interactor.GetWeatherInMoscowInteractor;
@@ -23,6 +27,12 @@ import rx.subscriptions.CompositeSubscription;
  */
 @PerFragment
 public class WeatherPresenterImpl extends WeatherPresenter {
+
+    /**
+     * Key to save view model
+     */
+    private static final String DATA = "DATA";
+
     /**
      * Data mapper for UI
      */
@@ -59,12 +69,32 @@ public class WeatherPresenterImpl extends WeatherPresenter {
         weatherEventProvider.onNext(HIDE_LOADING);
     };
     //~~ experimental area end
+    
+    /**
+     * ViewModel
+     */
+    private WeatherViewModel mViewModel;
 
     @Inject
     public WeatherPresenterImpl(GetWeatherInMoscowInteractor getWeather, WeatherMapper mapper) {
         mGetWeather = getWeather;
         mMapper = mapper;
         mSubscriptions = new CompositeSubscription();
+    }
+
+    @Override
+    public void onCreate(Bundle arguments, Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            mViewModel = savedInstanceState.getParcelable(DATA);
+            if (mViewModel != null) {
+                dataProvider.onNext(mViewModel);
+            }
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle bundle) {
+        bundle.putParcelable(DATA, mViewModel);
     }
 
     @Override
@@ -91,8 +121,8 @@ public class WeatherPresenterImpl extends WeatherPresenter {
                 .observeOn(AndroidSchedulers.mainThread())  // inject for testing
                 .compose(RxTransformers.applyOpBeforeAndAfter(mShowLoading, mHideLoading))
                 .subscribe(weather -> {
-                    WeatherViewModel viewModel = mMapper.map(weather);
-                    dataProvider.onNext(viewModel);
+                    mViewModel = mMapper.map(weather);
+                    dataProvider.onNext(mViewModel);
                 }, throwable -> {
                     errorProvider.onNext(WeatherView.WeatherError.GENERAL);
                 }, () -> {
