@@ -1,8 +1,6 @@
 package com.onemanparty.rxmvpandroid.weather.presenter;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.onemanparty.rxmvpandroid.core.utils.RxTransformers;
 import com.onemanparty.rxmvpandroid.core.view.PerFragment;
@@ -46,30 +44,30 @@ public class WeatherPresenterImpl extends WeatherPresenter {
     /**
      * Subject to publish results about weather in Moscow
      */
-    private Subject<WeatherViewModel, WeatherViewModel> dataProvider = BehaviorSubject.create();
-    private Subscription dataProviderSubscription;
+    private Subject<WeatherViewModel, WeatherViewModel> mDataProvider = BehaviorSubject.create();
+    private Subscription mDataProviderSubscription;
     /**
      * Subject to publish results about errors during fetching weather for Moscow
      */
-    private Subject<WeatherView.WeatherError, WeatherView.WeatherError> errorProvider = PublishSubject.create();
-    private Subscription errorProviderSubscription;
+    private Subject<WeatherView.WeatherError, WeatherView.WeatherError> mErrorProvider = PublishSubject.create();
+    private Subscription mErrorProviderSubscription;
 
     //~~ experimental area
     /**
      * Subject to publish general events (now used only to show / hide loading)
      */
-    private Subject<Integer, Integer> weatherEventProvider = PublishSubject.create();
-    private Subscription generalEventSubscription;
+    private Subject<Integer, Integer> mWeatherEventsProvider = PublishSubject.create();
+    private Subscription mWeatherEventsSubscription;
     final int SHOW_LOADING = 1;
     final int HIDE_LOADING = 2;
     private Runnable mShowLoading = () -> {
-        weatherEventProvider.onNext(SHOW_LOADING);
+        mWeatherEventsProvider.onNext(SHOW_LOADING);
     };
     private Runnable mHideLoading = () -> {
-        weatherEventProvider.onNext(HIDE_LOADING);
+        mWeatherEventsProvider.onNext(HIDE_LOADING);
     };
     //~~ experimental area end
-    
+
     /**
      * ViewModel
      */
@@ -87,7 +85,7 @@ public class WeatherPresenterImpl extends WeatherPresenter {
         if (savedInstanceState != null) {
             mViewModel = savedInstanceState.getParcelable(DATA);
             if (mViewModel != null) {
-                dataProvider.onNext(mViewModel);
+                mDataProvider.onNext(mViewModel);
             }
         }
     }
@@ -100,16 +98,16 @@ public class WeatherPresenterImpl extends WeatherPresenter {
     @Override
     public void attachView(WeatherView view) {
         super.attachView(view);
-        dataProviderSubscription = dataProvider.subscribe(this::updateUi);
-        errorProviderSubscription = errorProvider.subscribe(this::showError);
-        generalEventSubscription = weatherEventProvider.subscribe(this::propagateEvent);
+        mDataProviderSubscription = mDataProvider.subscribe(this::updateUi);
+        mErrorProviderSubscription = mErrorProvider.subscribe(this::showError);
+        mWeatherEventsSubscription = mWeatherEventsProvider.subscribe(this::propagateEvent);
     }
 
     @Override
     public void detachView() {
-        tryUnsubscribe(dataProviderSubscription);
-        tryUnsubscribe(errorProviderSubscription);
-        tryUnsubscribe(generalEventSubscription);
+        tryUnsubscribe(mDataProviderSubscription);
+        tryUnsubscribe(mErrorProviderSubscription);
+        tryUnsubscribe(mWeatherEventsSubscription);
         super.detachView();
     }
 
@@ -122,9 +120,9 @@ public class WeatherPresenterImpl extends WeatherPresenter {
                 .compose(RxTransformers.applyOpBeforeAndAfter(mShowLoading, mHideLoading))
                 .subscribe(weather -> {
                     mViewModel = mMapper.map(weather);
-                    dataProvider.onNext(mViewModel);
+                    mDataProvider.onNext(mViewModel);
                 }, throwable -> {
-                    errorProvider.onNext(WeatherView.WeatherError.GENERAL);
+                    mErrorProvider.onNext(WeatherView.WeatherError.GENERAL);
                 }, () -> {
                     // do nothing
                 }));
