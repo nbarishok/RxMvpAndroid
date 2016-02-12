@@ -1,12 +1,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.onemanparty.rxmvpandroid">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    
     <application android:allowBackup="true"
+                 android:name=".weather.WeatherApplication"
                  android:label="@string/app_name"
                  android:icon="@mipmap/ic_launcher"
                  android:supportsRtl="true"
                  android:theme="@style/AppTheme">
 
+        <activity android:name="com.onemanparty.rxmvpandroid.weather.view.WeatherActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

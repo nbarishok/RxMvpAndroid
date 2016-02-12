@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">RxMvpAndroid</string>
+    <string name="app_name">WeatherInMoscow</string>
+    <string name="weather_tv_temperature">%1$s\u2103</string>
 </resources>
