@@ -23,5 +23,6 @@ _WORK IN PROGRESS_
 TODO:
 <ol>
 <li>proper testing</li>
+<li>proper implementation of null-checks elimination and presenter optimiziation</li>
 <li>how presenter saving occurs (description)</li>
 </ol>
