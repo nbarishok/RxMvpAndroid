@@ -2,6 +2,7 @@ package com.onemanparty.rxmvpandroid.weather.presenter;
 
 import android.os.Bundle;
 
+import com.onemanparty.rxmvpandroid.core.presenter.BasePresenter;
 import com.onemanparty.rxmvpandroid.core.utils.RxTransformers;
 import com.onemanparty.rxmvpandroid.core.view.PerFragment;
 import com.onemanparty.rxmvpandroid.weather.model.interactor.GetWeatherInMoscowInteractor;
@@ -24,7 +25,7 @@ import rx.subscriptions.CompositeSubscription;
  * Implementation of {@link WeatherPresenter}
  */
 @PerFragment
-public class WeatherPresenterImpl extends WeatherPresenter {
+public class WeatherPresenterImpl implements WeatherPresenter {
 
     /**
      * Key to save view model
@@ -42,36 +43,18 @@ public class WeatherPresenterImpl extends WeatherPresenter {
     private CompositeSubscription mSubscriptions;
 
     /**
-     * Subject to publish results about weather in Moscow
-     */
-    private Subject<WeatherViewModel, WeatherViewModel> mDataProvider = BehaviorSubject.create();
-    private Subscription mDataProviderSubscription;
-    /**
-     * Subject to publish results about errors during fetching weather for Moscow
-     */
-    private Subject<WeatherView.WeatherError, WeatherView.WeatherError> mErrorProvider = PublishSubject.create();
-    private Subscription mErrorProviderSubscription;
-
-    //~~ experimental area
-    /**
-     * Subject to publish general events (now used only to show / hide loading)
-     */
-    private Subject<Integer, Integer> mWeatherEventsProvider = PublishSubject.create();
-    private Subscription mWeatherEventsSubscription;
-    final int SHOW_LOADING = 1;
-    final int HIDE_LOADING = 2;
-    private Runnable mShowLoading = () -> {
-        mWeatherEventsProvider.onNext(SHOW_LOADING);
-    };
-    private Runnable mHideLoading = () -> {
-        mWeatherEventsProvider.onNext(HIDE_LOADING);
-    };
-    //~~ experimental area end
-
-    /**
      * ViewModel
      */
     private WeatherViewModel mViewModel;
+    private WeatherView mView;
+
+    private Runnable mShowLoading = () -> {
+                mView.showLoading();
+            };
+    private Runnable mHideLoading = () -> {
+        mView.hideLoading();
+    };
+
 
     @Inject
     public WeatherPresenterImpl(GetWeatherInMoscowInteractor getWeather, WeatherMapper mapper) {
@@ -85,7 +68,7 @@ public class WeatherPresenterImpl extends WeatherPresenter {
         if (savedInstanceState != null) {
             mViewModel = savedInstanceState.getParcelable(DATA);
             if (mViewModel != null) {
-                mDataProvider.onNext(mViewModel);
+                updateUi(mViewModel);
             }
         }
     }
@@ -95,23 +78,17 @@ public class WeatherPresenterImpl extends WeatherPresenter {
         bundle.putParcelable(DATA, mViewModel);
     }
 
+    // todo abstract away attach / detach of view
     @Override
     public void attachView(WeatherView view) {
-        super.attachView(view);
-        mDataProviderSubscription = mDataProvider.subscribe(this::updateUi);
-        mErrorProviderSubscription = mErrorProvider.subscribe(this::showError);
-        mWeatherEventsSubscription = mWeatherEventsProvider.subscribe(this::propagateEvent);
+        mView = view;
     }
 
     @Override
     public void detachView() {
-        tryUnsubscribe(mDataProviderSubscription);
-        tryUnsubscribe(mErrorProviderSubscription);
-        tryUnsubscribe(mWeatherEventsSubscription);
-        super.detachView();
+        mView = null;
     }
 
-    @Override
     public void loadWeather() {
         mSubscriptions.add(mGetWeather
                 .get()
@@ -120,9 +97,9 @@ public class WeatherPresenterImpl extends WeatherPresenter {
                 .compose(RxTransformers.applyOpBeforeAndAfter(mShowLoading, mHideLoading))
                 .subscribe(weather -> {
                     mViewModel = mMapper.map(weather);
-                    mDataProvider.onNext(mViewModel);
+                    updateUi(mViewModel);
                 }, throwable -> {
-                    mErrorProvider.onNext(WeatherView.WeatherError.GENERAL);
+                    showError(WeatherView.WeatherError.GENERAL);
                 }, () -> {
                     // do nothing
                 }));
@@ -130,33 +107,18 @@ public class WeatherPresenterImpl extends WeatherPresenter {
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         if (mSubscriptions != null && !mSubscriptions.isUnsubscribed()) {
             mSubscriptions.unsubscribe();
         }
     }
 
     private void updateUi(WeatherViewModel weather) {
-        WeatherView view = getView();
-        view.setData(weather);
-        view.showContent();
+        mView.setData(weather);
+        mView.showContent();
     }
 
     private void showError(WeatherView.WeatherError error) {
-        WeatherView view = getView();
-        view.showError(error);
-    }
-
-    private void propagateEvent(int event) {
-        WeatherView view = getView();
-        switch (event) {
-            case SHOW_LOADING:
-                view.showLoading();
-                break;
-            case HIDE_LOADING:
-                view.hideLoading();
-                break;
-        }
+        mView.showError(error);
     }
 
     private void tryUnsubscribe(Subscription s) {

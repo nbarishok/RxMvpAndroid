@@ -7,7 +7,7 @@ import com.onemanparty.rxmvpandroid.weather.view.WeatherView;
 /**
  * Weather: Presenter
  */
-public abstract class WeatherPresenter extends BasePresenter<WeatherView> {
+public interface WeatherPresenter extends Presenter<WeatherView> {
 
 	public abstract void loadWeather();
 

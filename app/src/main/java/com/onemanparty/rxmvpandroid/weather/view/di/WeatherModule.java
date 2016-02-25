@@ -6,8 +6,11 @@ import com.onemanparty.rxmvpandroid.weather.model.interactor.GetWeatherInMoscowU
 import com.onemanparty.rxmvpandroid.weather.model.repository.WeatherRepository;
 import com.onemanparty.rxmvpandroid.weather.presenter.WeatherPresenter;
 import com.onemanparty.rxmvpandroid.weather.presenter.WeatherPresenterImpl;
+import com.onemanparty.rxmvpandroid.weather.proxy.WeatherProxy;
 import com.onemanparty.rxmvpandroid.weather.view.mapper.WeatherMapper;
 import com.onemanparty.rxmvpandroid.weather.view.mapper.WeatherMapperImpl;
+
+import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
@@ -29,6 +32,13 @@ public class WeatherModule {
     }
 
     @Provides
+    @PerFragment
+    WeatherPresenter provideCommunicationProxy(@Named("presenter") WeatherPresenter presenter) {
+        return new WeatherProxy(presenter);
+    }
+
+    @Provides
+    @Named("presenter")
     @PerFragment
     WeatherPresenter provideWeatherPresenter(GetWeatherInMoscowInteractor getWeather, WeatherMapper mapper) {
         return new WeatherPresenterImpl(getWeather, mapper);

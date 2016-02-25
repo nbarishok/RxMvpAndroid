@@ -24,8 +24,8 @@ public class WeatherFragment extends ComponentManagerFragment<WeatherComponent, 
 
     public static final String TAG = WeatherFragment.class.getSimpleName();
 
-    @Inject
-    WeatherPresenter presenter;
+    /*@Inject
+    WeatherPresenter presenter;*/
 
     @Bind(R.id.weather_tv_temp)
     TextView currentTemperature;
@@ -47,7 +47,7 @@ public class WeatherFragment extends ComponentManagerFragment<WeatherComponent, 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getComponent().inject(this);
+        //getComponent().inject(this);
     }
 
     @Override
