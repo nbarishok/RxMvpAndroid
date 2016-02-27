@@ -8,7 +8,5 @@ import com.onemanparty.rxmvpandroid.weather.view.WeatherView;
  * Weather: Presenter
  */
 public interface WeatherPresenter extends Presenter<WeatherView> {
-
-	public abstract void loadWeather();
-
+	void loadWeather();
 }

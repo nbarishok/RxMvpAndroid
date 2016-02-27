@@ -64,7 +64,6 @@ public class WeatherProxy implements WeatherView, WeatherPresenter {
         mView.showError(error);
     }
 
-
     // presenter
     @Override
     public void loadWeather() {

@@ -120,10 +120,4 @@ public class WeatherPresenterImpl implements WeatherPresenter {
     private void showError(WeatherView.WeatherError error) {
         mView.showError(error);
     }
-
-    private void tryUnsubscribe(Subscription s) {
-        if (s != null && !s.isUnsubscribed()) {
-            s.unsubscribe();
-        }
-    }
 }

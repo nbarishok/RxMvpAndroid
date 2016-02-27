@@ -47,7 +47,7 @@ public interface Presenter<V> {
 
 	//~~ other lifecycle methods that may be useful
 	//~~ omitted for example
-	// void onResume();;
+	// void onResume();
 
 	// void onPause();
 

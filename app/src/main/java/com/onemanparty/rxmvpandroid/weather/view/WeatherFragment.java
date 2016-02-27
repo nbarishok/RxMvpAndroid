@@ -9,11 +9,8 @@ import android.widget.Toast;
 import com.onemanparty.rxmvpandroid.R;
 import com.onemanparty.rxmvpandroid.core.persistance.ComponentManagerFragment;
 import com.onemanparty.rxmvpandroid.weather.WeatherApplication;
-import com.onemanparty.rxmvpandroid.weather.presenter.WeatherPresenter;
 import com.onemanparty.rxmvpandroid.weather.view.di.DaggerWeatherComponent;
 import com.onemanparty.rxmvpandroid.weather.view.di.WeatherComponent;
-
-import javax.inject.Inject;
 
 import butterknife.Bind;
 
