@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * View that persists state
+ * State-aware view model
  * Good oo-world citizens can implement State pattern here
  */
 public class WeatherViewState implements ViewState<WeatherView>, Parcelable {
@@ -35,8 +35,10 @@ public class WeatherViewState implements ViewState<WeatherView>, Parcelable {
     }
 
     public void setStateHideLoading() {
-        mCurrentState = STATE_DEFAULT;
-        mError = null;
+        if (mCurrentState != STATE_SHOW_ERROR) { // to avoid such things use State pattern
+            mCurrentState = STATE_DEFAULT;
+            mError = null;
+        }
     }
 
     public void setStateShowError(WeatherView.WeatherError error) {
