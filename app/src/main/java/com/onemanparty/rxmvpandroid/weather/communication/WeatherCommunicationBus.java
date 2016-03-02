@@ -3,6 +3,7 @@
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.onemanparty.rxmvpandroid.core.persistance.proxy.CommunicationBus;
 import com.onemanparty.rxmvpandroid.core.view.PerFragment;
 import com.onemanparty.rxmvpandroid.weather.presenter.WeatherPresenter;
 import com.onemanparty.rxmvpandroid.weather.view.WeatherView;
@@ -12,17 +13,18 @@ import com.onemanparty.rxmvpandroid.weather.view.model.WeatherViewState;
 import javax.inject.Inject;
 
 /**
- * Created by NBarishok on 24.02.2016.
+ * Object for establishing communication between view and presenter
  */
 @PerFragment
-public class WeatherCommunicationBus implements WeatherView, WeatherPresenter {
+public class WeatherCommunicationBus implements WeatherView, WeatherPresenter, CommunicationBus<WeatherViewState> {
 
     private static final String VIEW_STATE_KEY = "VIEW_STATE";
     private final WeatherPresenter mPresenter;
     private WeatherView mView;
     private WeatherViewState mViewState;
 
-    private WeatherViewState createViewState() {
+    @Override
+    public WeatherViewState createViewState() {
         return new WeatherViewState();
     }
 
