@@ -1,7 +1,9 @@
-package com.onemanparty.rxmvpandroid.weather.view;
+package com.onemanparty.rxmvpandroid.weather.view.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.onemanparty.rxmvpandroid.weather.view.WeatherView;
 
 /**
  * Model for {@link WeatherView}

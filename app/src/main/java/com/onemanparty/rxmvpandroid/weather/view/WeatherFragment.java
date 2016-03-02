@@ -9,8 +9,12 @@ import android.widget.Toast;
 import com.onemanparty.rxmvpandroid.R;
 import com.onemanparty.rxmvpandroid.core.persistance.ComponentManagerFragment;
 import com.onemanparty.rxmvpandroid.weather.WeatherApplication;
+import com.onemanparty.rxmvpandroid.weather.presenter.WeatherPresenter;
 import com.onemanparty.rxmvpandroid.weather.view.di.DaggerWeatherComponent;
 import com.onemanparty.rxmvpandroid.weather.view.di.WeatherComponent;
+import com.onemanparty.rxmvpandroid.weather.view.model.WeatherViewModel;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 
@@ -21,8 +25,8 @@ public class WeatherFragment extends ComponentManagerFragment<WeatherComponent, 
 
     public static final String TAG = WeatherFragment.class.getSimpleName();
 
-    /*@Inject
-    WeatherPresenter presenter;*/
+    @Inject
+    WeatherPresenter presenter;
 
     @Bind(R.id.weather_tv_temp)
     TextView currentTemperature;
@@ -44,7 +48,7 @@ public class WeatherFragment extends ComponentManagerFragment<WeatherComponent, 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getComponent().inject(this);
+        getComponent().inject(this);
     }
 
     @Override

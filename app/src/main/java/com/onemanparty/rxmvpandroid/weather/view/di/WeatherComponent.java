@@ -19,5 +19,5 @@ import dagger.Component;
 )
 @PerFragment
 public interface WeatherComponent extends HasPresenter<WeatherPresenter> {
-    //void inject(WeatherFragment fragment);
+    void inject(WeatherFragment fragment);
 }

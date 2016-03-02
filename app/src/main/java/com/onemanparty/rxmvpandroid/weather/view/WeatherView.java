@@ -1,6 +1,7 @@
 package com.onemanparty.rxmvpandroid.weather.view;
 
 import com.onemanparty.rxmvpandroid.core.view.LCEView;
+import com.onemanparty.rxmvpandroid.weather.view.model.WeatherViewModel;
 
 /**
  * View: Weather

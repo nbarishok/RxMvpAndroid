@@ -6,7 +6,7 @@ import com.onemanparty.rxmvpandroid.weather.model.interactor.GetWeatherInMoscowU
 import com.onemanparty.rxmvpandroid.weather.model.repository.WeatherRepository;
 import com.onemanparty.rxmvpandroid.weather.presenter.WeatherPresenter;
 import com.onemanparty.rxmvpandroid.weather.presenter.WeatherPresenterImpl;
-import com.onemanparty.rxmvpandroid.weather.proxy.WeatherProxy;
+import com.onemanparty.rxmvpandroid.weather.communication.WeatherCommunicationBus;
 import com.onemanparty.rxmvpandroid.weather.view.mapper.WeatherMapper;
 import com.onemanparty.rxmvpandroid.weather.view.mapper.WeatherMapperImpl;
 
@@ -33,8 +33,8 @@ public class WeatherModule {
 
     @Provides
     @PerFragment
-    WeatherPresenter provideCommunicationProxy(@Named("presenter") WeatherPresenter presenter) {
-        return new WeatherProxy(presenter);
+    WeatherPresenter provideCommunicationBus(@Named("presenter") WeatherPresenter presenter) {
+        return new WeatherCommunicationBus(presenter);
     }
 
     @Provides

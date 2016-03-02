@@ -1,14 +1,13 @@
- package com.onemanparty.rxmvpandroid.weather.proxy;
+ package com.onemanparty.rxmvpandroid.weather.communication;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 
 import com.onemanparty.rxmvpandroid.core.view.PerFragment;
 import com.onemanparty.rxmvpandroid.weather.presenter.WeatherPresenter;
 import com.onemanparty.rxmvpandroid.weather.view.WeatherView;
-import com.onemanparty.rxmvpandroid.weather.view.WeatherViewModel;
-import com.onemanparty.rxmvpandroid.weather.view.WeatherViewState;
+import com.onemanparty.rxmvpandroid.weather.view.model.WeatherViewModel;
+import com.onemanparty.rxmvpandroid.weather.view.model.WeatherViewState;
 
 import javax.inject.Inject;
 
@@ -16,7 +15,7 @@ import javax.inject.Inject;
  * Created by NBarishok on 24.02.2016.
  */
 @PerFragment
-public class WeatherProxy implements WeatherView, WeatherPresenter {
+public class WeatherCommunicationBus implements WeatherView, WeatherPresenter {
 
     private static final String VIEW_STATE_KEY = "VIEW_STATE";
     private final WeatherPresenter mPresenter;
@@ -28,7 +27,7 @@ public class WeatherProxy implements WeatherView, WeatherPresenter {
     }
 
     @Inject
-    public WeatherProxy(WeatherPresenter presenter) {
+    public WeatherCommunicationBus(WeatherPresenter presenter) {
         mPresenter = presenter;
         mViewState = createViewState();
         // we are ready to listen for presenter events

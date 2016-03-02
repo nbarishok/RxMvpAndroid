@@ -2,23 +2,18 @@ package com.onemanparty.rxmvpandroid.weather.presenter;
 
 import android.os.Bundle;
 
-import com.onemanparty.rxmvpandroid.core.presenter.BasePresenter;
 import com.onemanparty.rxmvpandroid.core.utils.RxTransformers;
 import com.onemanparty.rxmvpandroid.core.view.PerFragment;
 import com.onemanparty.rxmvpandroid.weather.model.interactor.GetWeatherInMoscowInteractor;
 import com.onemanparty.rxmvpandroid.weather.view.WeatherView;
-import com.onemanparty.rxmvpandroid.weather.view.WeatherViewModel;
+import com.onemanparty.rxmvpandroid.weather.view.model.WeatherViewModel;
 import com.onemanparty.rxmvpandroid.weather.view.mapper.WeatherMapper;
 
 
 import javax.inject.Inject;
 
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import rx.subjects.BehaviorSubject;
-import rx.subjects.PublishSubject;
-import rx.subjects.Subject;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -42,19 +37,14 @@ public class WeatherPresenterImpl implements WeatherPresenter {
     private final GetWeatherInMoscowInteractor mGetWeather;
     private CompositeSubscription mSubscriptions;
 
-    /**
-     * ViewModel
-     */
-    private WeatherViewModel mViewModel;
     private WeatherView mView;
 
     private Runnable mShowLoading = () -> {
-                mView.showLoading();
-            };
+        mView.showLoading();
+    };
     private Runnable mHideLoading = () -> {
         mView.hideLoading();
     };
-
 
     @Inject
     public WeatherPresenterImpl(GetWeatherInMoscowInteractor getWeather, WeatherMapper mapper) {
@@ -65,17 +55,12 @@ public class WeatherPresenterImpl implements WeatherPresenter {
 
     @Override
     public void onCreate(Bundle arguments, Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-            mViewModel = savedInstanceState.getParcelable(DATA);
-            if (mViewModel != null) {
-                updateUi(mViewModel);
-            }
-        }
+
     }
 
     @Override
     public void onSaveInstanceState(Bundle bundle) {
-        bundle.putParcelable(DATA, mViewModel);
+
     }
 
     // todo abstract away attach / detach of view
@@ -96,8 +81,8 @@ public class WeatherPresenterImpl implements WeatherPresenter {
                 .observeOn(AndroidSchedulers.mainThread())  // inject for testing
                 .compose(RxTransformers.applyOpBeforeAndAfter(mShowLoading, mHideLoading))
                 .subscribe(weather -> {
-                    mViewModel = mMapper.map(weather);
-                    updateUi(mViewModel);
+                    WeatherViewModel viewModel = mMapper.map(weather);
+                    updateUi(viewModel);
                 }, throwable -> {
                     showError(WeatherView.WeatherError.GENERAL);
                 }, () -> {
