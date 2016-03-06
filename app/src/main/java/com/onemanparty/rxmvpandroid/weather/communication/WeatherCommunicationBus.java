@@ -31,8 +31,8 @@ public class WeatherCommunicationBus implements WeatherView, WeatherPresenter, C
     @Inject
     public WeatherCommunicationBus(WeatherPresenter presenter) {
         mPresenter = presenter;
+        mView = DetachedWeatherView.instance();
         mViewState = createViewState();
-        // we are ready to listen for presenter events
         mPresenter.attachView(this);
     }
 
@@ -50,6 +50,7 @@ public class WeatherCommunicationBus implements WeatherView, WeatherPresenter, C
 
     @Override
     public void setData(WeatherViewModel data) {
+        mViewState.setData(data);
         mView.setData(data);
     }
 
@@ -74,8 +75,6 @@ public class WeatherCommunicationBus implements WeatherView, WeatherPresenter, C
     @Override
     public void attachView(WeatherView view) {
         mView = view;
-        // proxy in action
-        // has data --> push it to view
         mViewState.apply(view);
     }
 
