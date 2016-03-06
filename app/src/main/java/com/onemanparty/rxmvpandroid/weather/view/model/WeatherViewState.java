@@ -51,13 +51,11 @@ public class WeatherViewState implements ViewState<WeatherView>, Parcelable {
 
     @Override
     public void apply(WeatherView view) {
+        if (mModel != null) {
+            view.setData(mModel);
+            view.showContent();
+        }
         switch (mCurrentState) {
-            case STATE_DEFAULT:
-                if (mModel != null) {
-                    view.setData(mModel);
-                    view.showContent();
-                }
-                break;
             case STATE_SHOW_LOADING:
                 view.showLoading();
                 break;
