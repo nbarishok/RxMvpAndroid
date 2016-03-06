@@ -34,7 +34,18 @@ public abstract class ComponentManagerFragment<C extends HasPresenter, V> extend
     @Override
     protected void setupViews(View view) {
         super.setupViews(view);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         mComponentHelper.attachView((V)this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mComponentHelper.detachView();
     }
 
     @Override

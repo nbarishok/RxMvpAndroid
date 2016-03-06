@@ -65,6 +65,16 @@ public class ComponentHelper<C extends HasPresenter, V> {
     }
 
     /**
+     * Detach view from presenter
+     */
+    public void detachView() {
+        if (component == null) {
+            return;
+        }
+        component.getPresenter().detachView();
+    }
+
+    /**
      * Method to be called in onSaveInstanceState(..) of fragment
      * @param bundle bundle
      */
@@ -84,7 +94,6 @@ public class ComponentHelper<C extends HasPresenter, V> {
         if (component == null) {
             return;
         }
-        component.getPresenter().detachView();
         if (fragment.getActivity() != null && fragment.getActivity().isFinishing()) {
             removeComponent();
         }
