@@ -6,7 +6,7 @@ Here one can see yet another example of building an Android Application with hel
 Project contains of two submodules:
 <ul>
   <li>core: base classes</li>
-  <li>weather: sample app, displaying current temperature in Moscow based on http://openweathermap.org/api (add valid api-key in build.gradle to see the results)</li>
+  <li>weather: sample app, displaying current temperature in Moscow based on <a href="http://openweathermap.org/api">OpenWeatherMap api</a> (add valid api-key in build.gradle to see the results)</li>
 </ul>
 
 <ul>Also here you can find seceral useful techinques:
@@ -14,7 +14,7 @@ Project contains of two submodules:
 saving presenter during configuration change / low - memory. This techinque is implemented using Dagger2 with its custom scopes + fragment-lifecycle awareness.
 </li>
 <li>
-(raw) eliminationg nasty null - checks in presenter + optimizing presenter for it not to lose request results
+<b>mvp_experiment</b> branch has updates on communication between view and presenter. Details can be found in <a href="https://medium.com/@nbarishok/on-communication-between-v-and-p-in-android-mvp-16caf773e1a5#.hfuq2ddex">the article</a>
 </li>
 </ul>
 
@@ -23,6 +23,6 @@ _WORK IN PROGRESS_
 TODO:
 <ol>
 <li>proper testing</li>
-<li>proper implementation of null-checks elimination and presenter optimiziation</li>
-<li>how presenter saving occurs (description)</li>
+<li>further architecture improvement</li>
+<li>cover common (but interestring in terms of implementation in mvp) use cases during app development : services interaction, lists, dialogs etc.</li>
 </ol>
