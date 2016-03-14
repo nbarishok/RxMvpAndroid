@@ -20,12 +20,7 @@ import rx.subscriptions.CompositeSubscription;
  * Implementation of {@link WeatherPresenter}
  */
 @PerFragment
-public class WeatherPresenterImpl implements WeatherPresenter {
-
-    /**
-     * Key to save view model
-     */
-    private static final String DATA = "DATA";
+public class WeatherPresenterImpl extends WeatherPresenter {
 
     /**
      * Data mapper for UI
@@ -35,6 +30,7 @@ public class WeatherPresenterImpl implements WeatherPresenter {
      * Use case: get weather in Moscow
      */
     private final GetWeatherInMoscowInteractor mGetWeather;
+
     private CompositeSubscription mSubscriptions;
 
     private WeatherView mView;
@@ -82,7 +78,7 @@ public class WeatherPresenterImpl implements WeatherPresenter {
                 .compose(RxTransformers.applyOpBeforeAndAfter(mShowLoading, mHideLoading))
                 .subscribe(weather -> {
                     WeatherViewModel viewModel = mMapper.map(weather);
-                    updateUi(viewModel);
+                    updateUi(mMapper.map(weather));
                 }, throwable -> {
                     showError(WeatherView.WeatherError.GENERAL);
                 }, () -> {

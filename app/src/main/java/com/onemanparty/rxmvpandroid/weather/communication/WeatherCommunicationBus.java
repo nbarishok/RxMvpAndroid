@@ -3,7 +3,7 @@
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.onemanparty.rxmvpandroid.core.persistance.proxy.CommunicationBus;
+import com.onemanparty.rxmvpandroid.core.persistance.proxy.HasViewState;
 import com.onemanparty.rxmvpandroid.core.view.PerFragment;
 import com.onemanparty.rxmvpandroid.weather.presenter.WeatherPresenter;
 import com.onemanparty.rxmvpandroid.weather.view.WeatherView;
@@ -16,11 +16,12 @@ import javax.inject.Inject;
  * Object for establishing communication between view and presenter
  */
 @PerFragment
-public class WeatherCommunicationBus implements WeatherView, WeatherPresenter, CommunicationBus<WeatherViewState> {
+/* It better to think about it as PresenterProxy, I guess */
+public class WeatherCommunicationBus extends WeatherPresenter implements WeatherView,
+                                                                       HasViewState<WeatherViewState> {
 
     private static final String VIEW_STATE_KEY = "VIEW_STATE";
     private final WeatherPresenter mPresenter;
-    private WeatherView mView;
     private WeatherViewState mViewState;
 
     @Override
@@ -31,39 +32,39 @@ public class WeatherCommunicationBus implements WeatherView, WeatherPresenter, C
     @Inject
     public WeatherCommunicationBus(WeatherPresenter presenter) {
         mPresenter = presenter;
-        mView = DetachedWeatherView.instance();
         mViewState = createViewState();
+        attachView(DetachedWeatherView.instance());
         mPresenter.attachView(this);
     }
 
     @Override
     public void showLoading() {
         mViewState.setStateShowLoading();
-        mView.showLoading();
+        getView().showLoading();
     }
 
     @Override
     public void hideLoading() {
         mViewState.setStateHideLoading();
-        mView.hideLoading();
+        getView().hideLoading();
     }
 
     @Override
     public void setData(WeatherViewModel data) {
         mViewState.setData(data);
-        mView.setData(data);
+        getView().setData(data);
     }
 
     @Override
     public void showContent() {
         mViewState.setStateShowContent();
-        mView.showContent();
+        getView().showContent();
     }
 
     @Override
     public void showError(WeatherError error) {
         mViewState.setStateShowError(error);
-        mView.showError(error);
+        getView().showError(error);
     }
 
     // presenter
@@ -74,13 +75,13 @@ public class WeatherCommunicationBus implements WeatherView, WeatherPresenter, C
 
     @Override
     public void attachView(WeatherView view) {
-        mView = view;
+        super.attachView(view);
         mViewState.apply(view);
     }
 
     @Override
     public void detachView() {
-        mView = DetachedWeatherView.instance();
+        super.attachView(DetachedWeatherView.instance());
     }
 
     @Override
