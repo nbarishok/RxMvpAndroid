@@ -1,4 +1,4 @@
-package com.onemanparty.rxmvpandroid.core.persistance.holder;
+package com.onemanparty.rxmvpandroid.core.persistence.holder;
 
 import java.util.HashMap;
 import java.util.Map;

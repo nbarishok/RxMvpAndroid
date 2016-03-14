@@ -1,10 +1,10 @@
-package com.onemanparty.rxmvpandroid.core.persistance;
+package com.onemanparty.rxmvpandroid.core.persistence;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.onemanparty.rxmvpandroid.core.persistance.holder.ComponentHelper;
+import com.onemanparty.rxmvpandroid.core.persistence.holder.ComponentHelper;
 import com.onemanparty.rxmvpandroid.core.view.BaseFragment;
 
 /**

@@ -1,12 +1,12 @@
-package com.onemanparty.rxmvpandroid.core.persistance.holder;
+package com.onemanparty.rxmvpandroid.core.persistence.holder;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-import com.onemanparty.rxmvpandroid.core.persistance.ComponentCreator;
-import com.onemanparty.rxmvpandroid.core.persistance.HasPresenter;
+import com.onemanparty.rxmvpandroid.core.persistence.ComponentCreator;
+import com.onemanparty.rxmvpandroid.core.persistence.HasPresenter;
 
 import java.util.UUID;
 

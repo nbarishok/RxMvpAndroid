@@ -1,4 +1,4 @@
-package com.onemanparty.rxmvpandroid.core.persistance;
+package com.onemanparty.rxmvpandroid.core.persistence;
 
 import com.onemanparty.rxmvpandroid.core.presenter.Presenter;
 
