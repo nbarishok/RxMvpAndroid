@@ -1,4 +1,4 @@
-package com.onemanparty.rxmvpandroid.core.persistence.proxy;
+package com.onemanparty.rxmvpandroid.core.persistence.viewstate;
 
 /**
  * Interface for communication between view and presenter

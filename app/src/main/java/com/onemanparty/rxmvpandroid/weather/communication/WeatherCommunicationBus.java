@@ -3,7 +3,7 @@
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.onemanparty.rxmvpandroid.core.persistence.proxy.HasViewState;
+import com.onemanparty.rxmvpandroid.core.persistence.viewstate.HasViewState;
 import com.onemanparty.rxmvpandroid.core.view.PerFragment;
 import com.onemanparty.rxmvpandroid.weather.presenter.WeatherPresenter;
 import com.onemanparty.rxmvpandroid.weather.view.WeatherView;
