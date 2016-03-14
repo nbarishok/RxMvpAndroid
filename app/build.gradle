@@ -42,8 +42,8 @@ dependencies {
     compile 'com.google.code.gson:gson:2.4'
 
     // Dagger 2
-    compile 'com.google.dagger:dagger:2.1-SNAPSHOT'
-    apt 'com.google.dagger:dagger-compiler:2.1-SNAPSHOT'
+    compile 'com.google.dagger:dagger:2.1'
+    apt 'com.google.dagger:dagger-compiler:2.1'
     provided 'org.glassfish:javax.annotation:10.0-b28'
 
     // Retrofit
