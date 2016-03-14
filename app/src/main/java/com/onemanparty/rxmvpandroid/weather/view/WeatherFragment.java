@@ -7,7 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.onemanparty.rxmvpandroid.R;
-import com.onemanparty.rxmvpandroid.core.persistance.ComponentManagerFragment;
+import com.onemanparty.rxmvpandroid.core.persistence.ComponentManagerFragment;
 import com.onemanparty.rxmvpandroid.weather.WeatherApplication;
 import com.onemanparty.rxmvpandroid.weather.presenter.WeatherPresenter;
 import com.onemanparty.rxmvpandroid.weather.view.di.DaggerWeatherComponent;
