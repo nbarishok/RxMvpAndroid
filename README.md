@@ -14,11 +14,16 @@ Project contains of two submodules:
 saving presenter during configuration change / low - memory. This techinque is implemented using Dagger2 with its custom scopes + fragment-lifecycle awareness.
 </li>
 <li>
-<b>mvp_experiment</b> branch has updates on communication between view and presenter. Details can be found in <a href="https://medium.com/@nbarishok/on-communication-between-v-and-p-in-android-mvp-16caf773e1a5#.hfuq2ddex">the article</a>
+improved communication  between view and presenter. Details can be found in <a href="https://medium.com/@nbarishok/on-communication-between-v-and-p-in-android-mvp-16caf773e1a5#.hfuq2ddex">the article</a>
 </li>
 </ul>
 
 _WORK IN PROGRESS_
+
+NOW IN PROGRESS:
+<ol>
+<li>Handling navigation with MVP and Communication Bus</li>
+</ol>
 
 TODO:
 <ol>
