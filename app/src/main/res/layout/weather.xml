@@ -9,7 +9,11 @@
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/weather_tv_temperature"
         style="@style/Base.TextAppearance.AppCompat.Title"/>
 
+    <Button
+        android:id="@+id/weather_btn_navigate_with_probable_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NETWORK -> DIALOG -> ACTIVITY" />
 </FrameLayout>

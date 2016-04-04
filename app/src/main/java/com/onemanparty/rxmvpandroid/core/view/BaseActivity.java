@@ -28,7 +28,6 @@ public class BaseActivity extends AppCompatActivity {
 
 		setContentView();
 		ButterKnife.bind(this);
-
 	}
 
 	public void setContentView() {

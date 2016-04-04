@@ -5,10 +5,9 @@ import android.os.Parcelable;
 
 import com.onemanparty.rxmvpandroid.weather.view.WeatherView;
 
-/**
- * Model for {@link WeatherView}
- */
-public class WeatherViewModel implements Parcelable {
+import java.io.Serializable;
+
+public class WeatherViewModel implements Parcelable, Serializable {
 
     private int temperature;
 

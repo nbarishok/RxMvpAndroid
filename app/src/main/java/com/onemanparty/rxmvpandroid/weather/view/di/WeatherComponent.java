@@ -2,7 +2,7 @@ package com.onemanparty.rxmvpandroid.weather.view.di;
 
 import com.onemanparty.rxmvpandroid.core.view.PerFragment;
 import com.onemanparty.rxmvpandroid.core.persistence.HasPresenter;
-import com.onemanparty.rxmvpandroid.weather.AppComponent;
+import com.onemanparty.rxmvpandroid.AppComponent;
 import com.onemanparty.rxmvpandroid.weather.presenter.WeatherPresenter;
 import com.onemanparty.rxmvpandroid.weather.view.WeatherFragment;
 

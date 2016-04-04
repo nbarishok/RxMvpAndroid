@@ -5,34 +5,27 @@ import android.os.Bundle;
 import com.onemanparty.rxmvpandroid.core.utils.RxTransformers;
 import com.onemanparty.rxmvpandroid.core.view.PerFragment;
 import com.onemanparty.rxmvpandroid.weather.model.interactor.GetWeatherInMoscowInteractor;
+import com.onemanparty.rxmvpandroid.weather.view.CautionDialogData;
 import com.onemanparty.rxmvpandroid.weather.view.WeatherView;
 import com.onemanparty.rxmvpandroid.weather.view.model.WeatherViewModel;
 import com.onemanparty.rxmvpandroid.weather.view.mapper.WeatherMapper;
 
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 
+import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
-/**
- * Implementation of {@link WeatherPresenter}
- */
 @PerFragment
-public class WeatherPresenterImpl extends WeatherPresenter {
+public class WeatherPresenterImpl implements WeatherPresenter {
 
-    /**
-     * Data mapper for UI
-     */
     private WeatherMapper mMapper;
-    /**
-     * Use case: get weather in Moscow
-     */
     private final GetWeatherInMoscowInteractor mGetWeather;
-
     private CompositeSubscription mSubscriptions;
-
     private WeatherView mView;
 
     private Runnable mShowLoading = () -> {
@@ -77,13 +70,22 @@ public class WeatherPresenterImpl extends WeatherPresenter {
                 .observeOn(AndroidSchedulers.mainThread())  // inject for testing
                 .compose(RxTransformers.applyOpBeforeAndAfter(mShowLoading, mHideLoading))
                 .subscribe(weather -> {
-                    WeatherViewModel viewModel = mMapper.map(weather);
                     updateUi(mMapper.map(weather));
                 }, throwable -> {
                     showError(WeatherView.WeatherError.GENERAL);
-                }, () -> {
-                    // do nothing
                 }));
+    }
+
+    @Override
+    public void someInsaneActionClicked() {
+        Observable
+                .just(new CautionDialogData(101))
+                .subscribeOn(Schedulers.io())               // inject for testing
+                .delay(3000, TimeUnit.MILLISECONDS)         // simulate network request
+                .observeOn(AndroidSchedulers.mainThread())  // inject for testing
+                .subscribe(data -> {
+                    mView.showCautionDialog(data);
+                });
     }
 
     @Override

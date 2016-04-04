@@ -11,29 +11,21 @@ import android.support.annotation.Nullable;
  *
  * Presenter is aware of fragment / activity - lifecycle.
  * Lifecycle methods can be used to init presenter state, restore state, free resources etc.
+ *
+ * By contract presenter is free to communicate with view without null-checks between onCreate and onDestroy
  */
-public abstract class Presenter<V> {
-
-	private V mView;
+public interface Presenter<V> {
 
 	/**
 	 * attach view
 	 * @param view view
      */
-	public void attachView(V view) {
-		mView = view;
-	}
+	void attachView(V view);
 
 	/**
 	 * detach view
 	 */
-	public void detachView() {
-		mView = null;
-	}
-
-	public V getView() {
-		return mView;
-	}
+	void detachView();
 
 	/**
 	 * Provide presenter with some input
@@ -41,23 +33,17 @@ public abstract class Presenter<V> {
 	 * @param savedInstanceState saved state
 	 *                           (data to restore after low-memory is supposed to be here)
      */
-	public void onCreate(@Nullable Bundle arguments, @Nullable Bundle savedInstanceState) {
-
-	}
+	void onCreate(@Nullable Bundle arguments, @Nullable Bundle savedInstanceState);
 
 	/**
 	 * Save presenter state
 	 * @param bundle bundle
      */
-	public void onSaveInstanceState(Bundle bundle) {
-
-	}
+	void onSaveInstanceState(Bundle bundle);
 
 	/**
 	 * Presenter is about to be destroyed
 	 * Free resources etc.
 	 */
-	public void onDestroy() {
-
-	}
+	void onDestroy();
 }

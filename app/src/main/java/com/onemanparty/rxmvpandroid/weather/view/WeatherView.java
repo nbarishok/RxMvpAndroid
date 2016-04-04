@@ -1,15 +1,14 @@
 package com.onemanparty.rxmvpandroid.weather.view;
 
-import com.onemanparty.rxmvpandroid.core.view.LCEView;
+import com.onemanparty.rxmvpandroid.core.view.LceView;
 import com.onemanparty.rxmvpandroid.weather.view.model.WeatherViewModel;
 
-/**
- * View: Weather
- */
-public interface WeatherView extends LCEView<WeatherViewModel, WeatherView.WeatherError> {
+public interface WeatherView extends LceView<WeatherViewModel, WeatherView.WeatherError> {
 
-	enum WeatherError {
-		GENERAL
-	}
+    void showCautionDialog(CautionDialogData data);
+
+    enum WeatherError {
+        GENERAL
+    }
 
 }

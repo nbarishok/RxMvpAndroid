@@ -1,19 +1,17 @@
-package com.onemanparty.rxmvpandroid.weather;
+package com.onemanparty.rxmvpandroid;
 
 import android.app.Application;
 import android.content.Context;
 
-/**
- * Application
- */
 public class WeatherApplication extends Application {
 
 	private AppComponent component;
 
+	private static WeatherApplication instance;
 	@Override
 	public void onCreate() {
 		super.onCreate();
-
+		instance = this;
 	}
 
 	public static AppComponent getAppComponent(Context context) {
@@ -24,6 +22,10 @@ public class WeatherApplication extends Application {
 					.build();
 		}
 		return app.component;
+	}
+
+	public static WeatherApplication app() {
+		return instance;
 	}
 
 	protected AppModule getApplicationModule() {

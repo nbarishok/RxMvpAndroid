@@ -1,6 +1,8 @@
-package com.onemanparty.rxmvpandroid.weather;
+package com.onemanparty.rxmvpandroid;
 
 import android.content.Context;
+
+import com.onemanparty.rxmvpandroid.weather.utils.PathManager;
 
 import javax.inject.Singleton;
 
@@ -25,4 +27,10 @@ public class AppModule {
         return mApp;
     }
 
+
+    @Provides
+    @Singleton
+    PathManager providePathManager(Context context) {
+        return new PathManager(context);
+    }
 }
