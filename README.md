@@ -17,7 +17,7 @@ saving presenter during configuration change / low - memory. This techinque is i
 improved communication  between view and presenter. Details can be found in <a href="https://medium.com/@nbarishok/on-communication-between-v-and-p-in-android-mvp-16caf773e1a5#.hfuq2ddex">the article</a>
 </li>
 <li>
-navigation support, post about implementation details will appear in the nearest future
+navigation support, post about implementation details is in <a href="https://medium.com/@nbarishok/on-navigation-in-android-mvp-d26065586dcd#.oilhpvcr1">this article</a>
 </li>
 <li>
 Basic approach for manual  ViewState management is introduced, and the main reason for that - the fact that using onSaveInstanceState can lead to data loss
