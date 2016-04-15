@@ -1,6 +1,6 @@
 package com.onemanparty.rxmvpandroid.core.persistence.viewstate.impl.serializable;
 
-import com.onemanparty.rxmvpandroid.core.persistence.viewstate.base.AbsRestorableNavigationLceViewStateImpl;
+import com.onemanparty.rxmvpandroid.core.persistence.viewstate.base.AbsSelfRestorableNavigationLceViewStateImpl;
 import com.onemanparty.rxmvpandroid.core.persistence.viewstate.base.PendingStateChange;
 import com.onemanparty.rxmvpandroid.core.persistence.viewstate.impl.serializable.storage.ViewStateStorage;
 import com.onemanparty.rxmvpandroid.core.utils.lambda.Action1;
@@ -25,7 +25,7 @@ import rx.schedulers.Schedulers;
  * When ViewState is no longer needed clean the storage with {@link StorageBackedNavigationLceViewStateImpl#clean()}:
  * - onDestroy() for example
  */
-public class StorageBackedNavigationLceViewStateImpl<D extends Serializable, E extends Enum<E>, V extends LceView<D, E>> extends AbsRestorableNavigationLceViewStateImpl<D, E, V, Serializable> {
+public class StorageBackedNavigationLceViewStateImpl<D extends Serializable, E extends Enum<E>, V extends LceView<D, E>> extends AbsSelfRestorableNavigationLceViewStateImpl<D, E, V, Serializable> {
 
     private final ViewStateStorage storage;
 
@@ -39,8 +39,9 @@ public class StorageBackedNavigationLceViewStateImpl<D extends Serializable, E e
         save();
     }
 
-    public void setStateShowError(E error) {
-        super.setStateShowError(error);
+    @Override
+    public void setStateShowError(E error, boolean isShown) {
+        super.setStateShowError(error, isShown);
         save();
     }
 
@@ -97,6 +98,7 @@ public class StorageBackedNavigationLceViewStateImpl<D extends Serializable, E e
         }).subscribe();
     }
 
+    @Override
     public void clean() {
         storage.cleanUp();
     }

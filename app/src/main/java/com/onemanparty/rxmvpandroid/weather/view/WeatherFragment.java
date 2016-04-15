@@ -6,12 +6,12 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.onemanparty.lib.dialog.delegate.ConfirmDialogFragmentDelegate;
 import com.onemanparty.rxmvpandroid.R;
-import com.onemanparty.rxmvpandroid.core.persistence.ComponentManagerFragment;
 import com.onemanparty.rxmvpandroid.WeatherApplication;
+import com.onemanparty.rxmvpandroid.core.view.LceFragment;
+import com.onemanparty.rxmvpandroid.core.view.LceRefreshFragment;
 import com.onemanparty.rxmvpandroid.sandbox.SandboxActivity;
 import com.onemanparty.rxmvpandroid.weather.presenter.WeatherPresenter;
 import com.onemanparty.rxmvpandroid.weather.view.di.DaggerWeatherComponent;
@@ -23,7 +23,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class WeatherFragment extends ComponentManagerFragment<WeatherComponent, WeatherView> implements WeatherView {
+public class WeatherFragment extends LceFragment<WeatherComponent, WeatherViewModel, WeatherView.WeatherError, WeatherView> implements WeatherView {
 
     public static final String TAG = WeatherFragment.class.getSimpleName();
 
@@ -35,8 +35,6 @@ public class WeatherFragment extends ComponentManagerFragment<WeatherComponent, 
 
     @Bind(R.id.weather_btn_navigate_with_probable_show)
     Button navigationWithDialog;
-
-    private WeatherViewModel weather;
 
     ConfirmDialogFragmentDelegate<CautionDialogData> mCautionDialogDelegate;
 
@@ -75,7 +73,6 @@ public class WeatherFragment extends ComponentManagerFragment<WeatherComponent, 
     @Override
     public void setupViews(View view) {
         super.setupViews(view);
-        getComponent().getPresenter().loadWeather();
     }
 
     @Override
@@ -91,33 +88,19 @@ public class WeatherFragment extends ComponentManagerFragment<WeatherComponent, 
     }
 
     @Override
-    protected int getLayoutId() {
+    protected int getContentResId() {
         return R.layout.weather;
     }
 
     @Override
-    public void showLoading() {
-        currentTemperature.setText("loading");
-    }
-
-    @Override
-    public void hideLoading() {
-    }
-
-    @Override
-    public void setData(WeatherViewModel w) {
-        Toast.makeText(getContext(), "updated with data", Toast.LENGTH_SHORT).show();
-        weather = w;
+    public void loadData() {
+        getComponent().getPresenter().loadWeather();
     }
 
     @Override
     public void showContent() {
-        currentTemperature.setText(getString(R.string.weather_tv_temperature, weather.getTemperature()));
-    }
-
-    @Override
-    public void showError(WeatherError error) {
-        currentTemperature.setText("error!");
+        super.showContent();
+        currentTemperature.setText(getString(R.string.weather_tv_temperature, data.getTemperature()));
     }
 
     @Override

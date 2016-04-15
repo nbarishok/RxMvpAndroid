@@ -3,4 +3,9 @@
     <string name="weather_tv_temperature">%1$s\u2103</string>
     <string name="weather_dialog_title">Proceed to activity?</string>
     <string name="weather_dialog_subtitle">Just asking</string>
+    <string name="error_title_no_loaded">troubles while loading</string>
+    <string name="error_subtitle_no_loaded">try again if you wish</string>
+    <string name="retry_error_button">try again</string>
+    <string name="error_title_no_connection">Troubles with connection</string>
+    <string name="error_subtitle_no_connection">try again if you wish</string>
 </resources>

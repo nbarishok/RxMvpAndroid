@@ -16,17 +16,21 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        preSetupViews(view);
         setupViews(view);
     }
 
-    protected void setupViews(View view) {
+    protected void preSetupViews(final View view) {
 
+    }
+
+    protected void setupViews(View view) {
+        ButterKnife.bind(this, view);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(getLayoutId(), container, false);
-        ButterKnife.bind(this, view);
         return view;
     }
 

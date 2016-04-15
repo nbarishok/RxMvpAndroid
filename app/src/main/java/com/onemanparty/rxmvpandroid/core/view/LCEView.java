@@ -3,7 +3,7 @@ package com.onemanparty.rxmvpandroid.core.view;
 /**
  * Interface for Load-Content-Error view
  */
-public interface LceView<D, E> {
+public interface LceView<D, E> extends View {
 
 	void showLoading();
 	void hideLoading();
@@ -13,4 +13,5 @@ public interface LceView<D, E> {
 
 	void showError(E error);
 
+	void loadData();
 }

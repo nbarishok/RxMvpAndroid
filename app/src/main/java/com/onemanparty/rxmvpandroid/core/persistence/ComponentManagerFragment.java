@@ -2,10 +2,10 @@ package com.onemanparty.rxmvpandroid.core.persistence;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.View;
 
 import com.onemanparty.rxmvpandroid.core.persistence.holder.ComponentHelper;
 import com.onemanparty.rxmvpandroid.core.view.BaseFragment;
+import com.onemanparty.rxmvpandroid.core.view.View;
 
 /**
  * Base fragment that abstracts away presenter persistence management
@@ -13,7 +13,7 @@ import com.onemanparty.rxmvpandroid.core.view.BaseFragment;
  *
  * One thing to do is to implement {@code createComponent()} method to build object graph for fragment
  */
-public abstract class ComponentManagerFragment<C extends HasPresenter, V> extends BaseFragment {
+public abstract class ComponentManagerFragment<C extends HasPresenter, V extends View> extends BaseFragment {
 
     /**
      *  Helper object that contains all the logic to manage object graph state
@@ -32,7 +32,7 @@ public abstract class ComponentManagerFragment<C extends HasPresenter, V> extend
     }
 
     @Override
-    protected void setupViews(View view) {
+    protected void setupViews(android.view.View view) {
         super.setupViews(view);
     }
 

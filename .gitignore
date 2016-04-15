@@ -39,3 +39,5 @@ build
 *.ipr
 *~
 *.swp
+
+readme

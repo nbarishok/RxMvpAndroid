@@ -1,11 +1,8 @@
 package com.onemanparty.rxmvpandroid.core.view;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewGroupCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
 

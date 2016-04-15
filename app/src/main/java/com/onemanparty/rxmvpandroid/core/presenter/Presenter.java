@@ -3,6 +3,8 @@ package com.onemanparty.rxmvpandroid.core.presenter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.onemanparty.rxmvpandroid.core.view.View;
+
 /**
  * Presenter interface
  *
@@ -14,7 +16,7 @@ import android.support.annotation.Nullable;
  *
  * By contract presenter is free to communicate with view without null-checks between onCreate and onDestroy
  */
-public interface Presenter<V> {
+public interface Presenter<V extends View> {
 
 	/**
 	 * attach view

@@ -15,7 +15,7 @@ public interface LceViewState<D, E extends Enum<E>, V extends LceView<D, E>> ext
 
     void setStateShowLoading();
     void setStateHideLoading();
-    void setStateShowError(E error);
+    void setStateShowError(E error, boolean isShown);
     void setStateShowContent();
     void setData(D data);
 }

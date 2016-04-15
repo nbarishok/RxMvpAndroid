@@ -7,13 +7,14 @@ import android.support.v4.app.Fragment;
 
 import com.onemanparty.rxmvpandroid.core.persistence.ComponentCreator;
 import com.onemanparty.rxmvpandroid.core.persistence.HasPresenter;
+import com.onemanparty.rxmvpandroid.core.view.View;
 
 import java.util.UUID;
 
 /**
  * Helper class that contains all the logic to manage object graph state during lifecycle of a fragment
  */
-public class ComponentHelper<C extends HasPresenter, V> {
+public class ComponentHelper<C extends HasPresenter, V extends View> {
 
     /**
      * Screen id for object graph

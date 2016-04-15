@@ -44,7 +44,9 @@ public class WeatherPresenterImpl implements WeatherPresenter {
 
     @Override
     public void onCreate(Bundle arguments, Bundle savedInstanceState) {
-
+        if (savedInstanceState == null) {
+            mView.loadData();
+        }
     }
 
     @Override
@@ -66,6 +68,7 @@ public class WeatherPresenterImpl implements WeatherPresenter {
     public void loadWeather() {
         mSubscriptions.add(mGetWeather
                 .get()
+                .delay(3, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())               // inject for testing
                 .observeOn(AndroidSchedulers.mainThread())  // inject for testing
                 .compose(RxTransformers.applyOpBeforeAndAfter(mShowLoading, mHideLoading))

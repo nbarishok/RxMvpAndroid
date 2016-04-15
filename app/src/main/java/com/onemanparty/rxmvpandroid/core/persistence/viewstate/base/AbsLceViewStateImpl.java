@@ -1,9 +1,12 @@
 package com.onemanparty.rxmvpandroid.core.persistence.viewstate.base;
 
+import com.onemanparty.rxmvpandroid.core.persistence.viewstate.error_declaration.ErrorType;
+import com.onemanparty.rxmvpandroid.core.persistence.viewstate.error_declaration.ErrorTypes;
 import com.onemanparty.rxmvpandroid.core.view.LceView;
 
 /**
  * Base ViewState implementation for {@link LceView}
+ *
  * @param <D> type of data view operates on
  * @param <E> type of errors view can handle
  * @param <V> type of view
@@ -35,7 +38,13 @@ public abstract class AbsLceViewStateImpl<D, E extends Enum<E>, V extends LceVie
         error = null;
     }
 
-    public void setStateShowError(E storeError) {
+    @Override
+    public void setStateShowError(E storeError, boolean isShown) {
+        boolean isOneShot = isOneShot(storeError);
+        if (isOneShot && isShown) {
+            return;
+        }
+
         error = storeError;
         currentState = STATE_SHOW_ERROR;
     }
@@ -47,15 +56,24 @@ public abstract class AbsLceViewStateImpl<D, E extends Enum<E>, V extends LceVie
     @Override
     public void apply(V view) {
         restoreModel(view);
+
         switch (currentState) {
             case STATE_SHOW_LOADING:
                 view.showLoading();
                 break;
             case STATE_SHOW_ERROR:
                 view.showError(error);
+                cleanIfOneShot();
                 break;
             default:
                 break;
+        }
+    }
+
+    private void cleanIfOneShot() {
+        if (isOneShot(error)) {
+            error = null;
+            currentState = STATE_SHOW_CONTENT;
         }
     }
 
@@ -64,6 +82,22 @@ public abstract class AbsLceViewStateImpl<D, E extends Enum<E>, V extends LceVie
             view.setData(data);
             view.hideLoading();
             view.showContent();
+        } else {
+            view.loadData();
         }
+    }
+
+    // TODO generify things there will be new error types
+    private boolean isOneShot(E error) {
+        boolean hasAnnotation = false;
+        try {
+            ErrorType type = error.getDeclaringClass().getField(error.name()).getAnnotation(ErrorType.class);
+            if (type != null) {
+                hasAnnotation = type.type().equals(ErrorTypes.ONE_SHOT);
+            }
+        } catch (NoSuchFieldException e) {
+            // assume false
+        }
+        return hasAnnotation;
     }
 }
