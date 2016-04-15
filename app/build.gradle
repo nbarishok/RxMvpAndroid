@@ -13,7 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField 'String', 'WEATHER_API_KEY', '\"a80fa9ec5b2bb469fc1fe0cd1bdf75ed\"'
+        buildConfigField 'String', 'WEATHER_API_KEY', '\"your-app-id-goes-here\"'
         buildConfigField 'String', 'WEATHER_API_HOST', '\"http://api.openweathermap.org/data/2.5/\"'
 
     }
