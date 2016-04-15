@@ -1,6 +1,8 @@
 # RxMvpAndroid
 Sample to show how MVP, Clean Architecture and RxJava can help you in building Android App.
+<p>_WORK IN PROGRESS_</p>
 
+<h3> Description </h3>
 Here one can see yet another example of building an Android Application with help of MVP, Clean Architecture and RxJava.
 
 Project contains of two submodules:
@@ -27,7 +29,6 @@ Also dependency 'dialogwrapper.aar' appeared, it is a library to abstract away c
 </li>
 </ul>
 
-_WORK IN PROGRESS_
 
 NOW IN PROGRESS:
 <ol>
@@ -37,7 +38,14 @@ NOW IN PROGRESS:
 
 TODO:
 <ol>
+<li>cover common (but interestring in terms of implementation in mvp) use cases during app development : <br />
+services interaction,<br />
+lists,<br /> 
+view_pager etc.<br /> 
+</li>
 <li>proper testing</li>
 <li>further architecture improvement</li>
-<li>cover common (but interestring in terms of implementation in mvp) use cases during app development : services interaction, lists etc.</li>
 </ol>
+<hr />
+<h3>Current development contract</h3>
+<p> TODO </p>
