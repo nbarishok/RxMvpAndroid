@@ -33,6 +33,7 @@ Also dependency 'dialogwrapper.aar' appeared, it is a library to abstract away c
 NOW IN PROGRESS:
 <ol>
 <li>Reducing amounts of boilerplate code / time to write boilerplate code</li>
+<li>Custom views support</li>
 <li>dealing with real-world scenario</li>
 </ol>
 
