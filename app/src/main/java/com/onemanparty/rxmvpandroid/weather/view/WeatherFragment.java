@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.onemanparty.lib.dialog.delegate.ConfirmDialogFragmentDelegate;
 import com.onemanparty.rxmvpandroid.R;
 import com.onemanparty.rxmvpandroid.WeatherApplication;
-import com.onemanparty.rxmvpandroid.core.view.AbsLceFragment;
+import com.onemanparty.rxmvpandroid.base.ui.AbsButterLceFragment;
 import com.onemanparty.rxmvpandroid.view_pager.ViewPagerActivity;
 import com.onemanparty.rxmvpandroid.weather.presenter.WeatherPresenter;
 import com.onemanparty.rxmvpandroid.weather.view.di.DaggerWeatherComponent;
@@ -22,7 +22,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class WeatherFragment extends AbsLceFragment<WeatherComponent, WeatherViewModel, WeatherView.WeatherError, WeatherView> implements WeatherView {
+public class WeatherFragment extends AbsButterLceFragment<WeatherComponent, WeatherViewModel, WeatherView.WeatherError, WeatherView> implements WeatherView {
 
     public static final String TAG = WeatherFragment.class.getSimpleName();
 

@@ -53,7 +53,7 @@ public abstract class AbsLceFragment<C extends HasPresenter, M, E extends Enum<E
     }
 
     @Override
-    protected final void preSetupViews(final View view) {
+    protected void preSetupViews(final View view) {
         super.preSetupViews(view);
         ViewStub stub = (ViewStub) view.findViewById(R.id.content_placeholder);
         stub.setLayoutResource(getContentResId());

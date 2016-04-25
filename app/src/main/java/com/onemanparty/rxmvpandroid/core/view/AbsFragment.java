@@ -22,7 +22,7 @@ public abstract class AbsFragment extends Fragment {
     }
 
     protected void setupViews(View view) {
-        ButterKnife.bind(this, view);
+
     }
 
     @Override
@@ -34,7 +34,6 @@ public abstract class AbsFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
     protected abstract int getLayoutId();

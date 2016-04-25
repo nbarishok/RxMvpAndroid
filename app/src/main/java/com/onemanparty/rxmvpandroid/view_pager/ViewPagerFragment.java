@@ -5,11 +5,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.onemanparty.rxmvpandroid.R;
-import com.onemanparty.rxmvpandroid.core.view.AbsFragment;
+import com.onemanparty.rxmvpandroid.base.ui.AbsButterFragment;
 
 import butterknife.Bind;
 
-public class ViewPagerFragment extends AbsFragment {
+public class ViewPagerFragment extends AbsButterFragment {
 
     private static final String KEY_NUMBER = "KEY_NUMBER";
 
