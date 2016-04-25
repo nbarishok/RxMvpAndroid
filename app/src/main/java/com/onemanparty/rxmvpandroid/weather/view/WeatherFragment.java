@@ -10,9 +10,8 @@ import android.widget.TextView;
 import com.onemanparty.lib.dialog.delegate.ConfirmDialogFragmentDelegate;
 import com.onemanparty.rxmvpandroid.R;
 import com.onemanparty.rxmvpandroid.WeatherApplication;
-import com.onemanparty.rxmvpandroid.core.view.LceFragment;
-import com.onemanparty.rxmvpandroid.core.view.LceRefreshFragment;
-import com.onemanparty.rxmvpandroid.sandbox.SandboxActivity;
+import com.onemanparty.rxmvpandroid.core.view.AbsLceFragment;
+import com.onemanparty.rxmvpandroid.view_pager.ViewPagerActivity;
 import com.onemanparty.rxmvpandroid.weather.presenter.WeatherPresenter;
 import com.onemanparty.rxmvpandroid.weather.view.di.DaggerWeatherComponent;
 import com.onemanparty.rxmvpandroid.weather.view.di.WeatherComponent;
@@ -23,7 +22,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class WeatherFragment extends LceFragment<WeatherComponent, WeatherViewModel, WeatherView.WeatherError, WeatherView> implements WeatherView {
+public class WeatherFragment extends AbsLceFragment<WeatherComponent, WeatherViewModel, WeatherView.WeatherError, WeatherView> implements WeatherView {
 
     public static final String TAG = WeatherFragment.class.getSimpleName();
 
@@ -41,7 +40,7 @@ public class WeatherFragment extends LceFragment<WeatherComponent, WeatherViewMo
     private ConfirmDialogFragmentDelegate.OnConfirmWithDataDialogListener<CautionDialogData> listener = new ConfirmDialogFragmentDelegate.OnConfirmWithDataDialogListener<CautionDialogData>() {
         @Override
         public void onOkDialog(DialogFragment dialogFragment, CautionDialogData data) {
-            SandboxActivity.start(getActivity(), data);
+            ViewPagerActivity.start(getActivity(), data);
         }
 
         @Override

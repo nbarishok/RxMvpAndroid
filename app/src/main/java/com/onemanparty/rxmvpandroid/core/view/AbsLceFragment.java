@@ -22,7 +22,7 @@ import butterknife.Bind;
  * Handles CONNECTION, NO_DATA, GENERAL errors
  * To work properly, your view should be able to work with enum <code>XXXError</code> with corresponding fields
  */
-public abstract class LceFragment<C extends HasPresenter, M, E extends Enum<E>, V extends LceView<M, E>> extends ComponentManagerFragment<C, V> implements LceView<M, E> {
+public abstract class AbsLceFragment<C extends HasPresenter, M, E extends Enum<E>, V extends LceView<M, E>> extends ComponentManagerFragment<C, V> implements LceView<M, E> {
 
     @Bind(R.id.progress)
     ImageView progress;

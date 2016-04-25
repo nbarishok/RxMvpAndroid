@@ -8,9 +8,9 @@ import com.onemanparty.rxmvpandroid.core.persistence.HasPresenter;
 
 /**
  * Base class with swipe-to-refresh ability
- * To work properly layout, provided by {@link LceFragment#getContentResId()}, should have {@link SwipeRefreshLayout} with id = R.id.swipe
+ * To work properly layout, provided by {@link AbsLceFragment#getContentResId()}, should have {@link SwipeRefreshLayout} with id = R.id.swipe
  */
-public abstract class LceRefreshFragment<C extends HasPresenter, M, E extends Enum<E>, V extends LceView<M, E>> extends LceFragment<C, M, E, V> implements SwipeRefreshLayout.OnRefreshListener {
+public abstract class AbsLceRefreshFragment<C extends HasPresenter, M, E extends Enum<E>, V extends LceView<M, E>> extends AbsLceFragment<C, M, E, V> implements SwipeRefreshLayout.OnRefreshListener {
 
     private SwipeRefreshLayout swipe;
 

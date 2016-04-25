@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.onemanparty.rxmvpandroid.core.persistence.holder.ComponentHelper;
-import com.onemanparty.rxmvpandroid.core.view.BaseFragment;
+import com.onemanparty.rxmvpandroid.core.view.AbsFragment;
 import com.onemanparty.rxmvpandroid.core.view.View;
 
 /**
@@ -13,7 +13,7 @@ import com.onemanparty.rxmvpandroid.core.view.View;
  *
  * One thing to do is to implement {@code createComponent()} method to build object graph for fragment
  */
-public abstract class ComponentManagerFragment<C extends HasPresenter, V extends View> extends BaseFragment {
+public abstract class ComponentManagerFragment<C extends HasPresenter, V extends View> extends AbsFragment {
 
     /**
      *  Helper object that contains all the logic to manage object graph state

@@ -8,10 +8,7 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 
-/**
- * Base fragment implementation
- */
-public abstract class BaseFragment extends Fragment {
+public abstract class AbsFragment extends Fragment {
 
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
