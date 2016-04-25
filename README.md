@@ -34,7 +34,7 @@ NOW IN PROGRESS:
 <ol>
 <li>Reducing amounts of boilerplate code / time to write boilerplate code</li>
 <li>Custom views support</li>
-<li>dealing with real-world scenario</li>
+<li>dealing with real-world scenario (viewpager for now)</li>
 </ol>
 
 TODO:
