@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">WeatherInMoscow</string>
-    <string name="weather_tv_temperature">%1$s\u2103</string>
+    <string name="weather_tv_temperature">%1$d\u2103</string>
     <string name="weather_dialog_title">Proceed to activity?</string>
     <string name="weather_dialog_subtitle">Just asking</string>
     <string name="error_title_no_loaded">troubles while loading</string>
