@@ -17,6 +17,8 @@ import java.io.ObjectOutputStream;
  */
 public class FileViewStateStorage implements ViewStateStorage {
 
+    private final static String TEMP_PREFIX = ".temp";
+
     private final String fileName;
 
     public FileViewStateStorage(String fileName) {
@@ -27,9 +29,11 @@ public class FileViewStateStorage implements ViewStateStorage {
     public synchronized void save(Action1<ObjectOutputStream> action) {
         ObjectOutputStream objectOut = null;
         try {
-            FileOutputStream fileOut = new FileOutputStream(new File(fileName));
+            File tempFile = getTempFile();
+            FileOutputStream fileOut = new FileOutputStream(tempFile);
             objectOut = new ObjectOutputStream(fileOut);
             action.apply(objectOut);
+            tempFile.renameTo(getMainFile());
             fileOut.getFD().sync();
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,5 +74,15 @@ public class FileViewStateStorage implements ViewStateStorage {
     public synchronized void cleanUp() {
         File file = new File(fileName);
         file.delete();
+        File tempFile = new File(fileName.concat(TEMP_PREFIX));
+        tempFile.delete();
+    }
+
+    private File getTempFile() {
+        return new File(fileName.concat(TEMP_PREFIX));
+    }
+
+    private File getMainFile() {
+        return new File(fileName);
     }
 }
