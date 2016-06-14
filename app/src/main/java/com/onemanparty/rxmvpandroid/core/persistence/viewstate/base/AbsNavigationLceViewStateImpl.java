@@ -2,6 +2,7 @@ package com.onemanparty.rxmvpandroid.core.persistence.viewstate.base;
 
 import com.annimon.stream.Stream;
 import com.onemanparty.rxmvpandroid.core.view.LceView;
+import com.onemanparty.rxmvpandroid.core.view.view_model.EmptyViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * Base ViewState implementation for {@link LceView} with view-based navigation
  */
-public abstract class AbsNavigationLceViewStateImpl<D, E extends Enum<E>, V extends LceView<D, E>, T>
+public abstract class AbsNavigationLceViewStateImpl<D extends EmptyViewModel, E extends Enum<E>, V extends LceView<D, E>, T>
                         extends AbsLceViewStateImpl<D, E, V>
                         implements NavigationViewState<V, T> {
 

@@ -7,6 +7,7 @@ import com.onemanparty.rxmvpandroid.core.persistence.viewstate.base.AbsNavigatio
 import com.onemanparty.rxmvpandroid.core.utils.lambda.Action1;
 import com.onemanparty.rxmvpandroid.core.utils.lambda.Action2;
 import com.onemanparty.rxmvpandroid.core.view.LceView;
+import com.onemanparty.rxmvpandroid.core.view.view_model.EmptyViewModel;
 
 import java.util.ArrayList;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  * Implementation of ViewState for LceView with view-based navigation and ability to put itself
  * (the whole object) in Parcel
  */
-public class ParcelableDataNavigationLceViewStateImpl<D extends Parcelable, E extends Enum<E>, V extends LceView<D, E>>
+public class ParcelableDataNavigationLceViewStateImpl<D extends Parcelable & EmptyViewModel, E extends Enum<E>, V extends LceView<D, E>>
                 extends AbsNavigationLceViewStateImpl<D, E, V, Parcelable>
                 implements Parcelable{
 

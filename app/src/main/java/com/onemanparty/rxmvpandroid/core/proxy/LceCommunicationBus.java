@@ -3,12 +3,13 @@ package com.onemanparty.rxmvpandroid.core.proxy;
 import com.onemanparty.rxmvpandroid.core.persistence.viewstate.base.LceViewState;
 import com.onemanparty.rxmvpandroid.core.presenter.Presenter;
 import com.onemanparty.rxmvpandroid.core.view.LceView;
+import com.onemanparty.rxmvpandroid.core.view.view_model.EmptyViewModel;
 
 /**
  * Base classes for all communication buses for {@link LceView}
  * Handles ViewState restore, tracking ViewState for loading - content - error related operations
  */
-public class LceCommunicationBus<D, E extends Enum<E>, V extends LceView<D, E>, P extends Presenter<V>, VS extends LceViewState<D, E, V>>
+public class LceCommunicationBus<D extends EmptyViewModel, E extends Enum<E>, V extends LceView<D, E>, P extends Presenter<V>, VS extends LceViewState<D, E, V>>
         extends CommunicationBus<V, P>
         implements LceView<D, E> {
 

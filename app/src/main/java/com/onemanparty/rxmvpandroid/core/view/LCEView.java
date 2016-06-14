@@ -1,9 +1,11 @@
 package com.onemanparty.rxmvpandroid.core.view;
 
+import com.onemanparty.rxmvpandroid.core.view.view_model.EmptyViewModel;
+
 /**
  * Interface for Load-Content-Error view
  */
-public interface LceView<D, E> extends View {
+public interface LceView<D extends EmptyViewModel, E> extends View {
 
 	void showLoading();
 	void hideLoading();

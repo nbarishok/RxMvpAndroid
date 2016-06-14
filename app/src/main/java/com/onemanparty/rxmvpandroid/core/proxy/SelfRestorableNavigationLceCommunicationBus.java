@@ -9,6 +9,7 @@ import com.onemanparty.rxmvpandroid.core.persistence.viewstate.base.SelfRestorab
 import com.onemanparty.rxmvpandroid.core.persistence.viewstate.impl.serializable.SerializableViewNavigationResolver;
 import com.onemanparty.rxmvpandroid.core.presenter.Presenter;
 import com.onemanparty.rxmvpandroid.core.view.LceView;
+import com.onemanparty.rxmvpandroid.core.view.view_model.EmptyViewModel;
 
 import java.io.Serializable;
 
@@ -16,7 +17,7 @@ import java.io.Serializable;
  * Base class for all communication buses for {@link LceView} with view-based navigation(i.e. showing dialog, transition to another Activity etc.)
  * And also it inherits the ability to save / restore ViewState(but with pending view state navigations this time) automatically
  */
-public class SelfRestorableNavigationLceCommunicationBus<D,
+public class SelfRestorableNavigationLceCommunicationBus<D extends EmptyViewModel,
                                                         E extends Enum<E>,
                                                         V extends LceView<D, E>,
                                                         P extends Presenter<V>,

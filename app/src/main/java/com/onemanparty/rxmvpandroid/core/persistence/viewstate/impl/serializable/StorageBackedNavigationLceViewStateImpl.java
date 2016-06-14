@@ -6,6 +6,7 @@ import com.onemanparty.rxmvpandroid.core.persistence.viewstate.impl.serializable
 import com.onemanparty.rxmvpandroid.core.utils.lambda.Action1;
 import com.onemanparty.rxmvpandroid.core.utils.lambda.Action2;
 import com.onemanparty.rxmvpandroid.core.view.LceView;
+import com.onemanparty.rxmvpandroid.core.view.view_model.EmptyViewModel;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -25,7 +26,7 @@ import rx.schedulers.Schedulers;
  * When ViewState is no longer needed clean the storage with {@link StorageBackedNavigationLceViewStateImpl#clean()}:
  * - onDestroy() for example
  */
-public class StorageBackedNavigationLceViewStateImpl<D extends Serializable, E extends Enum<E>, V extends LceView<D, E>> extends AbsSelfRestorableNavigationLceViewStateImpl<D, E, V, Serializable> {
+public class StorageBackedNavigationLceViewStateImpl<D extends Serializable & EmptyViewModel, E extends Enum<E>, V extends LceView<D, E>> extends AbsSelfRestorableNavigationLceViewStateImpl<D, E, V, Serializable> {
 
     private final ViewStateStorage storage;
 

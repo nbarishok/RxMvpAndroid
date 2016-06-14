@@ -3,6 +3,7 @@ package com.onemanparty.rxmvpandroid.core.persistence.viewstate.base;
 import com.onemanparty.rxmvpandroid.core.persistence.viewstate.error_declaration.ErrorType;
 import com.onemanparty.rxmvpandroid.core.persistence.viewstate.error_declaration.ErrorTypes;
 import com.onemanparty.rxmvpandroid.core.view.LceView;
+import com.onemanparty.rxmvpandroid.core.view.view_model.EmptyViewModel;
 
 /**
  * Base ViewState implementation for {@link LceView}
@@ -11,7 +12,7 @@ import com.onemanparty.rxmvpandroid.core.view.LceView;
  * @param <E> type of errors view can handle
  * @param <V> type of view
  */
-public abstract class AbsLceViewStateImpl<D, E extends Enum<E>, V extends LceView<D, E>> implements LceViewState<D, E, V> {
+public abstract class AbsLceViewStateImpl<D extends EmptyViewModel, E extends Enum<E>, V extends LceView<D, E>> implements LceViewState<D, E, V> {
 
     protected int currentState;
     protected E error;
@@ -53,6 +54,10 @@ public abstract class AbsLceViewStateImpl<D, E extends Enum<E>, V extends LceVie
         this.data = data;
     }
 
+    public D getData() {
+        return data;
+    }
+
     @Override
     public void apply(V view) {
         restoreModel(view);
@@ -78,7 +83,7 @@ public abstract class AbsLceViewStateImpl<D, E extends Enum<E>, V extends LceVie
     }
 
     private void restoreModel(V view) {
-        if (data != null) {
+        if (data != null && !data.isEmpty()) {
             view.setData(data);
             view.hideLoading();
             view.showContent();

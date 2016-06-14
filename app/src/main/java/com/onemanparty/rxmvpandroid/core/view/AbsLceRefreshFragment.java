@@ -5,12 +5,13 @@ import android.view.View;
 
 import com.onemanparty.rxmvpandroid.R;
 import com.onemanparty.rxmvpandroid.core.persistence.HasPresenter;
+import com.onemanparty.rxmvpandroid.core.view.view_model.EmptyViewModel;
 
 /**
  * Base class with swipe-to-refresh ability
  * To work properly layout, provided by {@link AbsLceFragment#getContentResId()}, should have {@link SwipeRefreshLayout} with id = R.id.swipe
  */
-public abstract class AbsLceRefreshFragment<C extends HasPresenter, M, E extends Enum<E>, V extends LceView<M, E>> extends AbsLceFragment<C, M, E, V> implements SwipeRefreshLayout.OnRefreshListener {
+public abstract class AbsLceRefreshFragment<C extends HasPresenter, M extends EmptyViewModel, E extends Enum<E>, V extends LceView<M, E>> extends AbsLceFragment<C, M, E, V> implements SwipeRefreshLayout.OnRefreshListener {
 
     private SwipeRefreshLayout swipe;
 

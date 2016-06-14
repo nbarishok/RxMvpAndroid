@@ -11,6 +11,7 @@ import com.onemanparty.rxmvpandroid.R;
 import com.onemanparty.rxmvpandroid.core.persistence.ComponentManagerFragment;
 import com.onemanparty.rxmvpandroid.core.persistence.HasPresenter;
 import com.onemanparty.rxmvpandroid.core.utils.SnackbarHelper;
+import com.onemanparty.rxmvpandroid.core.view.view_model.EmptyViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ import butterknife.Bind;
  * Handles CONNECTION, NO_DATA, GENERAL errors
  * To work properly, your view should be able to work with enum <code>XXXError</code> with corresponding fields
  */
-public abstract class AbsLceFragment<C extends HasPresenter, M, E extends Enum<E>, V extends LceView<M, E>> extends ComponentManagerFragment<C, V> implements LceView<M, E> {
+public abstract class AbsLceFragment<C extends HasPresenter, M extends EmptyViewModel, E extends Enum<E>, V extends LceView<M, E>> extends ComponentManagerFragment<C, V> implements LceView<M, E> {
 
     @Bind(R.id.progress)
     ImageView progress;
@@ -175,7 +176,7 @@ public abstract class AbsLceFragment<C extends HasPresenter, M, E extends Enum<E
     }
 
     protected final boolean hasData() {
-        return data != null;
+        return data != null && !data.isEmpty();
     }
 
     @Override

@@ -3,11 +3,12 @@ package com.onemanparty.rxmvpandroid.weather.view.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.onemanparty.rxmvpandroid.core.view.view_model.EmptyViewModel;
 import com.onemanparty.rxmvpandroid.weather.view.WeatherView;
 
 import java.io.Serializable;
 
-public class WeatherViewModel implements Parcelable, Serializable {
+public class WeatherViewModel implements EmptyViewModel, Parcelable, Serializable {
 
     private int temperature;
 
