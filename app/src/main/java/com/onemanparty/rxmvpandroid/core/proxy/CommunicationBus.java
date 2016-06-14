@@ -43,8 +43,8 @@ public abstract class CommunicationBus<V extends View, P extends Presenter<V>>
 
     @Override
     public void onDestroy() {
-        presenter.detachView();
         presenter.onDestroy();
+        presenter.detachView();
     }
 
     protected P getPresenter() {
