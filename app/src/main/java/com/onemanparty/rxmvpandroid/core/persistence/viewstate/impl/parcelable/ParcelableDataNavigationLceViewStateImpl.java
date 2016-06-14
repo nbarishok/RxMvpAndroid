@@ -11,7 +11,8 @@ import com.onemanparty.rxmvpandroid.core.view.LceView;
 import java.util.ArrayList;
 
 /**
- * Implementation of ViewState for LceView with view-based navigation and ability to put itself in Parcel
+ * Implementation of ViewState for LceView with view-based navigation and ability to put itself
+ * (the whole object) in Parcel
  */
 public class ParcelableDataNavigationLceViewStateImpl<D extends Parcelable, E extends Enum<E>, V extends LceView<D, E>>
                 extends AbsNavigationLceViewStateImpl<D, E, V, Parcelable>
