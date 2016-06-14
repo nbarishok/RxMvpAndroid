@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.onemanparty.rxmvpandroid.core.utils.RxTransformers;
 import com.onemanparty.rxmvpandroid.core.view.PerFragment;
+import com.onemanparty.rxmvpandroid.core.view.presenter.RestorablePresenter;
 import com.onemanparty.rxmvpandroid.weather.model.interactor.GetWeatherInMoscowInteractor;
 import com.onemanparty.rxmvpandroid.weather.view.CautionDialogData;
 import com.onemanparty.rxmvpandroid.weather.view.WeatherView;
@@ -21,7 +22,7 @@ import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 @PerFragment
-public class WeatherPresenterImpl implements WeatherPresenter {
+public class WeatherPresenterImpl implements WeatherPresenter, RestorablePresenter<WeatherViewModel> {
 
     private WeatherMapper mMapper;
     private final GetWeatherInMoscowInteractor mGetWeather;
@@ -34,6 +35,7 @@ public class WeatherPresenterImpl implements WeatherPresenter {
     private Runnable mHideLoading = () -> {
         mView.hideLoading();
     };
+    private WeatherViewModel viewModel;
 
     @Inject
     public WeatherPresenterImpl(GetWeatherInMoscowInteractor getWeather, WeatherMapper mapper) {
@@ -73,7 +75,8 @@ public class WeatherPresenterImpl implements WeatherPresenter {
                 .observeOn(AndroidSchedulers.mainThread())  // inject for testing
                 .compose(RxTransformers.applyOpBeforeAndAfter(mShowLoading, mHideLoading))
                 .subscribe(weather -> {
-                    updateUi(mMapper.map(weather));
+                    viewModel = mMapper.map(weather);
+                    updateUi(viewModel);
                 }, throwable -> {
                     showError(WeatherView.WeatherError.GENERAL);
                 }));
@@ -105,5 +108,10 @@ public class WeatherPresenterImpl implements WeatherPresenter {
 
     private void showError(WeatherView.WeatherError error) {
         mView.showError(error);
+    }
+
+    @Override
+    public void restoreViewModel(WeatherViewModel viewModel) {
+        this.viewModel = viewModel;
     }
 }

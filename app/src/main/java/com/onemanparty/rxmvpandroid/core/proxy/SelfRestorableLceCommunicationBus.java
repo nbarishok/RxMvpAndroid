@@ -7,6 +7,7 @@ import com.onemanparty.rxmvpandroid.core.persistence.viewstate.base.LceViewState
 import com.onemanparty.rxmvpandroid.core.persistence.viewstate.base.SelfRestorableViewState;
 import com.onemanparty.rxmvpandroid.core.presenter.Presenter;
 import com.onemanparty.rxmvpandroid.core.view.LceView;
+import com.onemanparty.rxmvpandroid.core.view.presenter.RestorablePresenter;
 import com.onemanparty.rxmvpandroid.core.view.view_model.EmptyViewModel;
 
 /**
@@ -23,10 +24,17 @@ public abstract class SelfRestorableLceCommunicationBus<D extends EmptyViewModel
     public void onCreate(@Nullable Bundle arguments, @Nullable Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             viewState.restore();
+            restorePresenterViewModelIfNeeded();
         } else {
             viewState.clean();
         }
         super.onCreate(arguments, savedInstanceState);
+    }
+
+    private void restorePresenterViewModelIfNeeded() {
+        if (presenter instanceof RestorablePresenter) {
+            ((RestorablePresenter<D>) presenter).restoreViewModel(viewState.getData());
+        }
     }
 
     @Override
