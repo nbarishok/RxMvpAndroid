@@ -1,6 +1,5 @@
 # RxMvpAndroid
 Sample to show how MVP, Clean Architecture and RxJava can help you in building Android App.
-<p>_WORK IN PROGRESS_</p>
 
 <h3> Description </h3>
 Here one can see yet another example of building an Android Application with help of MVP, Clean Architecture and RxJava.
@@ -28,25 +27,3 @@ Basic approach for manual  ViewState management is introduced, and the main reas
 Also dependency 'dialogwrapper.aar' appeared, it is a library to abstract away complexities of working with dialogs. Sources with the base implementation can be found <a href="https://github.com/nbarishok/DialogFragmentTinyWrapper"> here</a>. This approach for dealing with dialogs works for me.
 </li>
 </ul>
-
-
-NOW IN PROGRESS:
-<ol>
-<li>Reducing amounts of boilerplate code / time to write boilerplate code</li>
-<li>Custom views support</li>
-<li>dealing with real-world scenario (viewpager for now)</li>
-</ol>
-
-TODO:
-<ol>
-<li>cover common (but interestring in terms of implementation in mvp) use cases during app development : <br />
-services interaction,<br />
-lists,<br />
-view_pager etc.<br />
-</li>
-<li>proper testing</li>
-<li>further architecture improvement</li>
-</ol>
-<hr />
-<h3>Current development contract</h3>
-<p> TODO </p>
